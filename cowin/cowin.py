@@ -5,26 +5,25 @@ import datetime
 d=datetime.datetime.today().strftime('%d-%m-%Y')
 
 # 18 or 45
-age=18    
+age=18   
 
 # No of people                                                  
-tot=3 
+tot=3
 
 # Type of vaccination : COVISHIELD, COVAXIN ...                                                
 vacc="COVISHIELD"
 
 # Pincodes list 
-pincodes=['560056','560059','560060', '560074', '560098']
+pincodes=['530016']
 
-FromEmail=""    # From Email ID inside double quote
+FromEmail="thallam.sai@btech.christuniversity.in"    # From Email ID inside double quote
 FromEmailPass=""         # From Email ID password inside double quote
-ToEmail=""  # To Email ID inside double quote
+ToEmail="m.vchandrahas@gmail.com"  # To Email ID inside double quote
 
 
-message = """From: {FromEmail}
-To: {ToEmail}
+message = """From:thallam.sai@btech.christuniversity.in
+To: m.vchandrahas@gmail.com
 Subject: Vaccine Available
-
 """
 c=0
 for k in range(len(pincodes)):
@@ -39,13 +38,13 @@ for k in range(len(pincodes)):
         print(response.json()["centers"][i-1]["sessions"][j-1]["vaccine"])
         s = smtplib.SMTP('smtp.gmail.com', 587)
         s.starttls()
-        s.login(FromEmail, FromEmailPass)
+        s.login("m.vchandrahas@gmail.com", "Password")
         str1=response.json()["centers"][i-1]["name"]
         str2=response.json()["centers"][i-1]["sessions"][j-1]["available_capacity"]
         message= (message+ "\n" +	"Center name : " + str1 + "\n"+"Available :" + str(str2) + "\n")
         c=1
 
 if (c==1):
-  s.sendmail(FromEmail, ToEmail, message)
-  print('Email sent to '+ToEmail+' From '+FromEmail)
+  s.sendmail("m.vchandrahas@gmail.com", "subham40404@gmail.com", message)
+  #print('Email sent to '+ToEmail+' From '+FromEmail)
   s.quit()
